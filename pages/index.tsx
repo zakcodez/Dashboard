@@ -1,5 +1,7 @@
+import Image from "next/image"
+
 function HomePage() {
-	return <div>Welcome to Next.js!</div>
+	return <></>
 }
 
 export default HomePage;
