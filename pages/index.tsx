@@ -1,7 +1,11 @@
-import Image from "next/image"
+import { Navbar } from "../components";
 
 function HomePage() {
-	return <></>
+	return (
+		<>
+			<Navbar />
+		</>
+	)
 }
 
 export default HomePage;
