@@ -1,6 +1,9 @@
 import React from "react";
+import { Page } from "../types";
 
-interface Props { }
+interface Props {
+	page: Page;
+}
 
 interface State { }
 
@@ -8,27 +11,31 @@ class Navbar extends React.Component<Props, State> {
 	state: State = {}
 
 	render() {
+		const { props } = this;
 		return (
 			<>
 				<nav className="navbar navbar-expand-lg bg-light">
 					<div className="container-fluid">
-						<a className="navbar-brand" href="#">Dashboard</a>
+						<a className="navbar-brand" href="/">Dashboard</a>
 						<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 							<span className="navbar-toggler-icon"></span>
 						</button>
 						<div className="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 								<li className="nav-item">
-									<a className="nav-link active" href="/">Home</a>
+									<a className={props.page === "home" ? "nav-link active" : "nav-link"} href="/">Home</a>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="/todo">Todo</a>
+									<a className={props.page === "todo" ? "nav-link active" : "nav-link"} href="/todo">Todo</a>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="/shopping-list">Shopping list</a>
+									<a className={props.page === "shopping-list" ? "nav-link active" : "nav-link"} href="/shopping-list">Shopping list</a>
 								</li>
 								<li className="nav-item">
-									<a className="nav-link" href="/chat">Chat</a>
+									<a className={props.page === "weather" ? "nav-link active" : "nav-link"} href="/weather">Weather</a>
+								</li>
+								<li className="nav-item">
+									<a className={props.page === "chat" ? "nav-link active" : "nav-link"} href="/chat">Chat</a>
 								</li>
 							</ul>
 						</div>
@@ -39,4 +46,4 @@ class Navbar extends React.Component<Props, State> {
 	}
 }
 
-export default Navbar
+export default Navbar;
