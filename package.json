@@ -22,6 +22,7 @@
 	},
 	"homepage": "https://github.com/zakcodez/Dashboard#readme",
 	"dependencies": {
+		"bootstrap": "^5.2.2",
 		"next": "^13.0.2",
 		"npm": "^9.1.1",
 		"react": "^18.2.0",
