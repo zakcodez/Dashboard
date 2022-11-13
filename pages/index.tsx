@@ -1,11 +1,18 @@
+import React from "react";
 import { Navbar } from "../components";
 
-function HomePage() {
-	return (
-		<>
-			<Navbar />
-		</>
-	)
+interface Props { }
+
+interface State { }
+
+class HomePage extends React.Component<Props, State> {
+	render() {
+		return (
+			<>
+				<Navbar page="home" />
+			</>
+		)
+	}
 }
 
 export default HomePage;
