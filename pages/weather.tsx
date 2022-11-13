@@ -5,7 +5,7 @@ interface Props { }
 
 interface State { }
 
-class HomePage extends React.Component<Props, State> {
+class Weather extends React.Component<Props, State> {
 	render() {
 		return (
 			<>
@@ -15,4 +15,4 @@ class HomePage extends React.Component<Props, State> {
 	}
 }
 
-export default HomePage;
+export default Weather;
