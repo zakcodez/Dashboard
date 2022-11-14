@@ -1,29 +1,37 @@
-import React from "react";
 import { Navbar, Forecast } from "../components";
 import { GetServerSidePropsContext } from "next";
 import axios from "axios";
-import { WeatherData } from "../types";
+import { WeatherData, WeatherError } from "../types";
+import { useEffect, useState } from "react"
 
-interface Props {
-	data: WeatherData;
-}
 
-interface State { }
+function Weather() {
+	const [data, setData] = useState<WeatherData | WeatherError>(null);
+	const [isLoading, setLoading] = useState(false);
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-	const { data } = await axios<WeatherData>("/api/weather");
-	return { props: { data } }
-}
+	useEffect(() => {
+		setLoading(true);
+		navigator.geolocation.getCurrentPosition((pos) => {
+			const { latitude, longitude } = pos.coords;
+			fetch(`/api/weather?latitude=${latitude}&longitude=${longitude}`)
+				.then((res) => res.json())
+				.then((data: WeatherData | WeatherError) => {
+					setLoading(false);
+					setData(data);
+				}).catch(() => {
+					setData({ message: "Cannot get weather data" });
+				});
+		}, () => {
+			setData({ message: "Unable to get GPS location" });
+		});
+	}, [])
 
-class Weather extends React.Component<Props, State> {
-	render() {
-		return (
-			<>
-				<Navbar page="weather" />
-				<Forecast data={this.props.data} />
-			</>
-		)
-	}
+	return (
+		<>
+			<Navbar page="weather" />
+			<Forecast data={data} />
+		</>
+	)
 }
 
 export default Weather;
