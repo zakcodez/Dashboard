@@ -2,7 +2,7 @@ import React from "react";
 import { WeatherData, WeatherError } from "../types";
 
 interface Props {
-	data: WeatherData | WeatherError
+	data: WeatherData | WeatherError;
 }
 
 function Forecast(props: Props) {
