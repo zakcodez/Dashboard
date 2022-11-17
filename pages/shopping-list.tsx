@@ -5,14 +5,14 @@ interface Props { }
 
 interface State { }
 
-class HomePage extends React.Component<Props, State> {
+class ShoppingList extends React.Component<Props, State> {
 	render() {
 		return (
 			<>
-				<Navbar page="home" />
+				<Navbar page="shopping-list" />
 			</>
 		)
 	}
 }
 
-export default HomePage;
+export default ShoppingList;
