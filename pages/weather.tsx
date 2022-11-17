@@ -29,7 +29,11 @@ function Weather() {
 	return (
 		<>
 			<Navbar page="weather" />
-			<Forecast data={data} />
+			<div className="container-fluid">
+				{isLoading && <p>Loading</p>}
+				{(data && "coord" in data) && <Forecast data={data} />}
+				{(data && "message" in data) && data.message}
+			</div>
 		</>
 	)
 }

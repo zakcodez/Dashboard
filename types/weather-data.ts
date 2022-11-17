@@ -51,6 +51,7 @@ interface Weather {
 interface Wind {
 	speed: number;
 	deg: number;
+	gust: number;
 }
 
 export default WeatherData;
