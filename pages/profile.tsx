@@ -1,10 +1,11 @@
+import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
-import React from "react";
+import { useEffect } from "react";
 import { Wrapper } from "../components";
 import { UserCookie } from "../types";
-import jwt from "jsonwebtoken";
 
 interface Props {
+	loggedIn: boolean;
 	user: UserCookie | null;
 }
 
@@ -17,17 +18,25 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 		: typeof json === "string"
 			? JSON.parse(json)
 			: json;
-	return { props: { user } }
+	return { props: { loggedIn, user } }
 }
 
-function ShoppingList({ user }: Props) {
+function Profile({ loggedIn, user }: Props) {
+	useEffect(() => {
+		if (!loggedIn) location.assign("/login");
+	});
+
 	return (
 		<>
-			<Wrapper page="shopping-list" user={user}>
-				Sorry, shopping list is unavailable right now
+			<Wrapper page="" user={user}>
+				{loggedIn && <>
+					<p>Username: {user.username}</p>
+					<p>Admin: {user.admin ? "Yes" : "No"}</p>
+				</>
+				}
 			</Wrapper>
 		</>
 	)
 }
 
-export default ShoppingList;
+export default Profile;

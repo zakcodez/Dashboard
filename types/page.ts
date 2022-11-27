@@ -1,3 +1,3 @@
-type Page = "home" | "shopping-list" | "todo" | "weather" | "chat";
+type Page = "home" | "shopping-list" | "todo" | "weather" | "chat" | "";
 
 export default Page
