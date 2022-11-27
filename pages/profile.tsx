@@ -31,7 +31,7 @@ function Profile({ loggedIn, user }: Props) {
 			<Wrapper page="" user={user}>
 				{loggedIn && <>
 					<p>Username: {user.username}</p>
-					<p>Admin: {user.admin}</p>
+					<p>Admin: {user.admin ? "Yes" : "No"}</p>
 				</>
 				}
 			</Wrapper>
