@@ -1,9 +1,11 @@
-import { Wrapper } from "../components";
-import { UserCookie } from "../types";
 import jwt from "jsonwebtoken";
 import { GetServerSidePropsContext } from "next";
+import { useEffect } from "react";
+import { Wrapper } from "../components";
+import { UserCookie } from "../types";
 
 interface Props {
+	loggedIn: boolean;
 	user: UserCookie | null;
 }
 
@@ -16,17 +18,25 @@ export function getServerSideProps(context: GetServerSidePropsContext) {
 		: typeof json === "string"
 			? JSON.parse(json)
 			: json;
-	return { props: { user } }
+	return { props: { loggedIn, user } }
 }
 
-function HomePage({ user }: Props) {
+function Profile({ loggedIn, user }: Props) {
+	useEffect(() => {
+		if (!loggedIn) location.assign("/login");
+	});
+
 	return (
 		<>
-			<Wrapper user={user} page={""}>
-					<h3>Welcome back, {user ? user.username : "human"}</h3>
+			<Wrapper page="" user={user}>
+				{loggedIn && <>
+					<p>Username: {user.username}</p>
+					<p>Admin: {user.admin}</p>
+				</>
+				}
 			</Wrapper>
 		</>
 	)
 }
 
-export default HomePage;
+export default Profile;

@@ -1,7 +1,13 @@
 interface User {
 	username: string;
 	password: string;
-	isLoggedIn: boolean;
+	id: number;
+	admin: boolean;
+}
+
+export interface UserCookie {
+	admin: boolean;
+	username: string
 }
 
 export default User;
