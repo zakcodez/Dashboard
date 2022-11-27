@@ -1,18 +1,33 @@
+import { GetServerSidePropsContext } from "next";
 import React from "react";
-import { Navbar } from "../components";
+import { Wrapper } from "../components";
+import { UserCookie } from "../types";
+import jwt from "jsonwebtoken";
 
-interface Props { }
+interface Props {
+	user: UserCookie | null;
+}
 
-interface State { }
+export function getServerSideProps(context: GetServerSidePropsContext) {
+	const { authtoken } = context.req.cookies;
+	const loggedIn = !!authtoken;
+	const json = jwt.decode(authtoken);
+	const user = !loggedIn
+		? null
+		: typeof json === "string"
+			? JSON.parse(json)
+			: json;
+	return { props: { user } }
+}
 
-class ShoppingList extends React.Component<Props, State> {
-	render() {
-		return (
-			<>
-				<Navbar page="shopping-list" />
-			</>
-		)
-	}
+function ShoppingList({ user }: Props) {
+	return (
+		<>
+			<Wrapper page="shopping-list" user={user}>
+				Sorry, shopping list is unavailable right now
+			</Wrapper>
+		</>
+	)
 }
 
 export default ShoppingList;
