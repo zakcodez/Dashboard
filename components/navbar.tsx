@@ -12,7 +12,7 @@ function Navbar(props: Props) {
 		if (user) {
 			document.cookie = "authtoken=";
 			setUser(null);
-			location.reload();
+			location.assign("/");
 		} else location.assign("/login");
 	}
 
